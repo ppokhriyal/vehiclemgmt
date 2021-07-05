@@ -1,0 +1,39 @@
+{% extends 'home/layout.html'%}
+{% block content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3 border-bottom">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('home.home')}}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Register Vehicle</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="card w-50 mt-4 shadow">
+    <div class="card-header fw-bold">
+      Vehicle Registration Form
+    </div>
+    <div class="card-body">
+      <form action="" method="post">
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Vehicle No.</label>
+          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Owner Name</label>
+          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Route No.</label>
+          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Make/Model</label>
+          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn btn-success btn-sm">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>    
+{% endblock content %}

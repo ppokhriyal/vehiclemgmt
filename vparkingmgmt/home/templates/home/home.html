@@ -1,0 +1,85 @@
+{% extends 'home/layout.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3 border-bottom">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn btn-primary">
+      Total Vehicles entered <span class="badge bg-secondary">4</span>
+    </button>
+    <button type="button" class="btn btn-primary">
+      Total Vehicles exited <span class="badge bg-secondary">2</span>
+    </button>
+    <button type="button" class="btn btn-primary">
+      Total Unregistered Vehicles<span class="badge bg-secondary ms-2">2</span>
+    </button>
+  </div>
+  <div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+      <button class="btn btn-warning btn-sm" type="button" id="reloadbtn" onclick="reload()">Reload</button>
+      <button class="btn btn-warning btn-sm" type="button" disabled id="loadingbtn"> 
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Reloading...
+      </button>
+    </div>
+    <table class="table tamble-sm table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Vehicle No.</th>
+          <th scope="col">Tag Id</th>
+          <th scope="col">Owner Name</th>
+          <th scope="col">Route No.</th>
+          <th scope="col">Make/Model</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+         <td>MH-98-R8</td>
+          <td>TAG987620219</td>
+          <td>Example 1</td>
+          <td>42</td>
+          <td>Tata</td>
+          <td>
+            <a href="http://"><span class="badge rounded-pill bg-danger">Delete</span></a>
+            <a href="http://"><span class="badge rounded-pill bg-secondary">Edit</span></a>
+          </td>
+        </tr>
+        <tr>
+          <td>MH-76-J3</td>
+          <td>TAG127833543</td>
+          <td>Example 2</td>
+          <td>10</td>
+          <td>Force</td>
+          <td>
+            <a href="http://"><span class="badge rounded-pill bg-danger">Delete</span></a>
+            <a href="http://"><span class="badge rounded-pill bg-secondary">Edit</span></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+  <script>
+    document.getElementById("loadingbtn").style.display = "none";
+  </script>
+  <script>
+    function reload(){
+      document.getElementById("reloadbtn").style.display = "none";
+      document.getElementById("loadingbtn").style.display = "block";
+      location.reload();
+    }
+  </script>
+{% endblock content%}
