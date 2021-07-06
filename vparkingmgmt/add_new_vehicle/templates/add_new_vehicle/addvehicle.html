@@ -13,25 +13,35 @@
       Vehicle Registration Form
     </div>
     <div class="card-body">
-      <form action="" method="post">
+      <form action="" method="POST">
+        {{form.hidden_tag()}}
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Vehicle No.</label>
-          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+          {% if form.vehicleno.errors %}
+            {{ form.vehicleno(class="form-control w-75 is-invalid")}}
+            <div class="invalid-feedback">
+              {% for error in form.vehicleno.errors %}
+                  <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{form.vehicleno(class="form-control w-75")}}
+          {% endif %}
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Owner Name</label>
-          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+          {{form.ownername(class="form-control w-75")}}
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Route No.</label>
-          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+          {{form.routeno(class="form-control w-75")}}
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Make/Model</label>
-          <input type="text" class="form-control w-75" id="formGroupExampleInput2" placeholder="">
+          {{form.makemodel(class="form-control w-75")}}
         </div>
         <div class="mb-3">
-          <button type="button" class="btn btn-success btn-sm">Register</button>
+          {{form.submit(class="btn btn-success btn-sm")}}
         </div>
       </form>
     </div>

@@ -9,69 +9,87 @@
   </div>
   <div class="mb-3">
     <button type="button" class="btn btn-primary">
-      Total Vehicles entered <span class="badge bg-secondary">4</span>
+      Total Vehicles entered <span class="badge bg-secondary">0</span>
     </button>
     <button type="button" class="btn btn-primary">
-      Total Vehicles exited <span class="badge bg-secondary">2</span>
+      Total Vehicles exited <span class="badge bg-secondary">0</span>
     </button>
     <button type="button" class="btn btn-primary">
-      Total Unregistered Vehicles<span class="badge bg-secondary ms-2">2</span>
+      Total Unregistered Vehicles<span class="badge bg-secondary ms-2">0</span>
     </button>
   </div>
   <div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-      <button class="btn btn-warning btn-sm" type="button" id="reloadbtn" onclick="reload()">Reload</button>
-      <button class="btn btn-warning btn-sm" type="button" disabled id="loadingbtn"> 
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        Reloading...
-      </button>
+    <!--Registered Vehicle Table-->
+    {% if  registered_vehicle_length == 0 %}
+      <div class="alert alert-primary d-flex align-items-center" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+      <div>
+        Registerd Vehicle data not found. Please register vehicle from <a href="{{url_for('add_new_vehicle.add_new_vehicle')}}">here</a>
+      </div>
     </div>
-    <table class="table tamble-sm table-bordered table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Vehicle No.</th>
-          <th scope="col">Tag Id</th>
-          <th scope="col">Owner Name</th>
-          <th scope="col">Route No.</th>
-          <th scope="col">Make/Model</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-         <td>MH-98-R8</td>
-          <td>TAG987620219</td>
-          <td>Example 1</td>
-          <td>42</td>
-          <td>Tata</td>
-          <td>
-            <a href="http://"><span class="badge rounded-pill bg-danger">Delete</span></a>
-            <a href="http://"><span class="badge rounded-pill bg-secondary">Edit</span></a>
-          </td>
-        </tr>
-        <tr>
-          <td>MH-76-J3</td>
-          <td>TAG127833543</td>
-          <td>Example 2</td>
-          <td>10</td>
-          <td>Force</td>
-          <td>
-            <a href="http://"><span class="badge rounded-pill bg-danger">Delete</span></a>
-            <a href="http://"><span class="badge rounded-pill bg-secondary">Edit</span></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </nav>
+
+    {% else %}
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <button class="btn btn-warning btn-sm" type="button" id="reloadbtn" onclick="reload()">Reload</button>
+        <button class="btn btn-warning btn-sm" type="button" disabled id="loadingbtn"> 
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Reloading...
+        </button>
+      </div>
+      <table class="table tamble-sm table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Vehicle No.</th>
+            <th scope="col">Registerd on</th>
+            <th scope="col">Tag Id</th>
+            <th scope="col">Owner Name</th>
+            <th scope="col">Route No.</th>
+            <th scope="col">Make/Model</th>
+            <th scope="col">Entry Time</th>
+            <th scope="col">Exit Time</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in registered_vehicle_record.items %}
+            <tr>
+              <td>{{i.vehiclenum}}</td>
+              <td>{{i.date_created.strftime('%d-%m-%Y')}}</td>
+              <td>{{i.tagid}}</td>
+              <td>{{i.ownername}}</td>
+              <td>{{i.routeno}}</td>
+              <td>{{i.makemodel}}</td>
+              <td>{{i.entrytime}}</td>
+              <td>{{i.exitime}}</td>
+              <td>
+                <a href="#"><span class="badge rounded-pill bg-danger">Delete</span></a>
+                <a href="#"><span class="badge rounded-pill bg-secondary">Edit</span></a>
+                {% if i.tagid == None %}
+                  <a href="#"><span class="badge rounded-pill bg-success">Tag</span></a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="rounded-0">
+        {% for page_num in registered_vehicle_record.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+          {% if page_num %}
+            {% if registered_vehicle_record.page == page_num %}
+              <a class="btn btn-secondary btn-sm mt-2" href="{{ url_for('home.home',page=page_num)}}">{{ page_num }}</a>
+            {% else %}
+              <a class="btn btn-outline-info mt-2" href="{{ url_for('home.home',page=page_num)}}">{{ page_num }}</a>
+            {% endif %}  
+          {% else %}
+              ...
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
+
   <script>
     document.getElementById("loadingbtn").style.display = "none";
   </script>
