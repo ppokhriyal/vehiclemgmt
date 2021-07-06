@@ -7,7 +7,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '878436c0a462c4145fa59eec2c43a66a'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
-app.config['SQLALCHEMY_BINDS'] = {'user':'sqlite:///user.db'}
+app.config['SQLALCHEMY_BINDS'] = {'user':'sqlite:///user.db','vehicalregistered':'sqlite:///vehicalregistered.db'}
 db = SQLAlchemy(app)
 
 #Login Manager

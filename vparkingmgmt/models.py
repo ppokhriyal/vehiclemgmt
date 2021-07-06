@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from enum import unique
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from vparkingmgmt import app,db,login_manager
 from flask_login import UserMixin
@@ -22,3 +23,14 @@ class User(db.Model,UserMixin):
     
     def __repr__(self):
         return f"User('{self.username}')"
+
+# Vehicals Registered
+class VehicalRegistered(db.Model):
+    __bind_key__ = 'vehicalregistered'
+    vehical_no = db.Column(db.String,primary_key=True)
+    tagid = db.Column(db.String(20),unique=True)
+    ownername = db.Column(db.String(20),nullable=False)
+    routeno = db.Column(db.Integer,nullable=False)
+    makemodel = db.Column(db.Integer,nullable=False)
+    entrytime = db.Column(db.String(20),nullable=True)
+    exitime = db.Column(db.String(20),nullable=True)
