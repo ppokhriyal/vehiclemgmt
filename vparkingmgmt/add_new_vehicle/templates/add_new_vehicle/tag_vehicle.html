@@ -8,21 +8,25 @@
             </ol>
         </nav>
     </div>
-    <div class="row">
-        <div class="col-5">
-            <div class="input-group mt-3 pt-4 mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-tags"></i></span>
-                <input type="text" class="form-control" placeholder="Enter Tag Id" aria-label="Username" aria-describedby="basic-addon1">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select Vehicle No.</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-            <div class="d-grid gap-2">
-                <button class="btn btn-success" type="button">Tag Vehicle</button>
-            </div>
+    <div class="card w-50 mt-4 shadow">
+        <div class="card-header fw-bold">
+            Tag Registered Vehicle
+        </div>
+        <div class="card-body">
+            <form action="" method="POST">
+                {{form.hidden_tag()}}
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Tag ID</label>
+                    {{form.tagid(class="form-control w-75")}}
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Registered Vehicle No.</label>
+                    {{form.registered_vehicle(class="form-control w-75")}}
+                </div>
+                <div class="mb-3">
+                    {{form.submit(class="btn btn-success btn-sm")}}
+                </div>
+            </form>
         </div>
     </div>
 {% endblock content %}

@@ -38,3 +38,6 @@ class VehicalRegistered(db.Model):
     exitime = db.Column(db.String(20),nullable=True)
     date_created = db.Column(db.DateTime(),nullable=False,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+    def __repr__(self):
+        return f"{self.vehiclenum}"
