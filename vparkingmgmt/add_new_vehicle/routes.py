@@ -21,6 +21,16 @@ def add_new_vehicle():
         
     return render_template('add_new_vehicle/addvehicle.html',title='Register Vehicle',form=form)
 
+# Delete Registered Vehicle
+@blue.route('/delete/vehicle/<int:uid>',methods=['GET','POST'])
+def delete_vehicle(uid):
+    userid = VehicalRegistered.query.get_or_404(uid)
+    if userid.uservehicle != current_user:
+        abort(404)
+    db.session.delete(userid)
+    db.session.commit()
+    flash(f"Vehicle No. {userid.vehiclenum} removed successfully",'success')
+    return redirect(url_for('home.home'))
 # Add tag to vehicle
 @blue.route('/tag/vehicle',methods=['GET','POST'])
 def tag_vehicle():
