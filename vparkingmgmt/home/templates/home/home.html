@@ -65,7 +65,7 @@
               <td>{{i.exitime}}</td>
               <td>
                 <a href="{{url_for('add_new_vehicle.delete_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-danger">Delete</span></a>
-                <a href="#"><span class="badge rounded-pill bg-secondary">Edit</span></a>
+                <a href="{{url_for('add_new_vehicle.update_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-secondary">Update</span></a>
                 {% if i.tagid == None %}
                   <a href="#"><span class="badge rounded-pill bg-success">Tag</span></a>
                 {% endif %}

@@ -1,7 +1,8 @@
 from flask import Blueprint,render_template,url_for, flash, redirect, request, abort, session
+from flask_wtf import form
 from vparkingmgmt import app,db,login_manager
 from flask_login import login_user, current_user, logout_user, login_required,fresh_login_required
-from vparkingmgmt.add_new_vehicle.forms import RegisterVehicleForm
+from vparkingmgmt.add_new_vehicle.forms import RegisterVehicleForm,UpdateVehicleForm
 from vparkingmgmt.models import User,VehicalRegistered
 
 #Blueprint object
@@ -31,6 +32,22 @@ def delete_vehicle(uid):
     db.session.commit()
     flash(f"Vehicle No. {userid.vehiclenum} removed successfully",'success')
     return redirect(url_for('home.home'))
+
+# Edit Registered Vehicle Data
+@blue.route('/update/vehicle/<int:uid>',methods=['GET','POST'])
+def update_vehicle(uid):
+    form = UpdateVehicleForm()
+    user_vehicle = VehicalRegistered.query.get_or_404(uid)
+    if form.validate_on_submit():
+        user_vehicle.ownername = form.ownername.data
+        user_vehicle.routeno = form.routeno.data
+        user_vehicle.makemodel = form.makemodel.data
+        db.session.commit()
+        flash(f"Vehicle No. {user_vehicle.vehiclenum} details updated successfully",'success')
+        return redirect(url_for('home.home'))
+        
+    return render_template('add_new_vehicle/update_vehicle.html',title="Update Vehicle",user_vehicle=user_vehicle,form=form)
+
 # Add tag to vehicle
 @blue.route('/tag/vehicle',methods=['GET','POST'])
 def tag_vehicle():

@@ -17,3 +17,10 @@ class RegisterVehicleForm(FlaskForm):
         vehicle = VehicalRegistered.query.filter_by(vehiclenum=vehicleno.data).first()
         if vehicle:
             raise ValidationError('Vehicle number  already registered')
+
+# Update Vehicle
+class UpdateVehicleForm(FlaskForm):
+    ownername = StringField('Owner Name',validators=[DataRequired()])
+    routeno = StringField('Route No.',validators=[DataRequired()])
+    makemodel = StringField('Make/Model',validators=[DataRequired()])
+    submit = SubmitField('Update')
