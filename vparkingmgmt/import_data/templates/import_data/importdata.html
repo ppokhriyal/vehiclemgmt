@@ -1,0 +1,28 @@
+{% extends 'home/layout.html'%}
+{% block content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3 border-bottom">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('home.home')}}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Import Data</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="card w-50 mt-4 shadow">
+    <div class="card-header fw-bold">
+        Upload Excel Data
+    </div>
+    <div class="card-body">
+        <form action="" method="POST" enctype=multipart/form-data>
+            {{form.hidden_tag()}}
+            <div class="mb-3">
+                {{form.file(class="form-control w-75")}}
+                <small>'.xlsx' extnstions are allowed</small>
+            </div>
+            <div class="mb-3">
+                {{form.submit(class="btn btn-sm btn-success")}}
+            </div>
+        </form>
+    </div>
+  </div>
+{% endblock content %}
