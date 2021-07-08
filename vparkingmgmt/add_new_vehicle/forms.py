@@ -43,3 +43,18 @@ class TagRegisteredVehicleForm(FlaskForm):
         if tag:
             raise ValidationError('Tag is already assigned')
 
+# Tag Vehicle
+class TagVehicleForm(FlaskForm):
+    tagid = StringField('Tag Id',validators=[DataRequired()])
+    submit = SubmitField('Tag')
+
+    # check if tag id is already assigned
+    def validate_tagid(self,tagid):
+        tag = VehicalRegistered.query.filter_by(tagid=tagid.data).first()
+        if tag:
+            raise ValidationError('Tag is already assigned')
+
+
+
+
+

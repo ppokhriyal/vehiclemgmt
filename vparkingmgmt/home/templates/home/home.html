@@ -32,8 +32,8 @@
 
     {% else %}
       <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-        <button class="btn btn-warning btn-sm" type="button" id="reloadbtn" onclick="reload()">Reload</button>
-        <button class="btn btn-warning btn-sm" type="button" disabled id="loadingbtn"> 
+        <button class="btn btn-secondary btn-sm" type="button" id="reloadbtn" onclick="reload()">Reload</button>
+        <button class="btn btn-secondary btn-sm" type="button" disabled id="loadingbtn"> 
           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           Reloading...
         </button>
@@ -42,7 +42,7 @@
         <thead class="table-dark">
           <tr>
             <th scope="col">Vehicle No.</th>
-            <th scope="col">Registerd on</th>
+            <!-- <th scope="col">Registerd on</th> -->
             <th scope="col">Tag Id</th>
             <th scope="col">Owner Name</th>
             <th scope="col">Route No.</th>
@@ -56,7 +56,7 @@
           {% for i in registered_vehicle_record.items %}
             <tr>
               <td>{{i.vehiclenum}}</td>
-              <td>{{i.date_created.strftime('%d-%m-%Y')}}</td>
+              <!-- <td>{{i.date_created.strftime('%d-%m-%Y')}}</td> -->
               <td>{{i.tagid}}</td>
               <td>{{i.ownername}}</td>
               <td>{{i.routeno}}</td>
@@ -67,7 +67,7 @@
                 <a href="{{url_for('add_new_vehicle.delete_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-danger">Delete</span></a>
                 <a href="{{url_for('add_new_vehicle.update_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-secondary">Update</span></a>
                 {% if i.tagid == None %}
-                  <a href="#"><span class="badge rounded-pill bg-success">Tag</span></a>
+                  <a href="{{url_for('add_new_vehicle.vehicle_tag',vehiclenum=i.vehiclenum)}}"><span class="badge rounded-pill bg-success">Tag</span></a>
                 {% endif %}
               </td>
             </tr>

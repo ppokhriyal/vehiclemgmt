@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,url_for, flash, redirect, request, a
 from flask_wtf import form
 from vparkingmgmt import app,db,login_manager
 from flask_login import login_user, current_user, logout_user, login_required,fresh_login_required
-from vparkingmgmt.add_new_vehicle.forms import RegisterVehicleForm,UpdateVehicleForm,TagRegisteredVehicleForm
+from vparkingmgmt.add_new_vehicle.forms import RegisterVehicleForm,UpdateVehicleForm,TagRegisteredVehicleForm,TagVehicleForm
 from vparkingmgmt.models import User,VehicalRegistered
 
 #Blueprint object
@@ -56,12 +56,26 @@ def update_vehicle(uid):
 @login_required
 def tag_vehicle():
     form = TagRegisteredVehicleForm()
+    registered_vehicle_length = len(VehicalRegistered.query.filter_by(user_id=current_user.id).all())
     if form.validate_on_submit():
-        vehicle_num = form.registered_vehicle.data
-        print(vehicle_num)
-        user_vehicle = VehicalRegistered.query.filter_by(vehiclenum=vehicle_num).first()
+        kwargs = {'vehiclenum':str(form.registered_vehicle.data)}
+        user_vehicle = VehicalRegistered.query.filter_by(**kwargs).first()
         user_vehicle.tagid = form.tagid.data
         db.session.commit()
         flash(f"Vehicle No. {user_vehicle.vehiclenum} tagged successfully",'success')
         return redirect(url_for('home.home'))
-    return render_template('add_new_vehicle/tag_vehicle.html',title="Tag Vehicle",form=form)
+    return render_template('add_new_vehicle/tag_vehicle.html',title="Tag Vehicle",form=form,registered_vehicle_length=registered_vehicle_length)
+
+# Tag Vehicle
+@blue.route('/vehicle/tag/<string:vehiclenum>',methods=['POST','GET'])
+@login_required
+def vehicle_tag(vehiclenum):
+    form = TagVehicleForm()
+    if form.validate_on_submit():
+        user_vehicle = VehicalRegistered.query.filter_by(vehiclenum=vehiclenum).first()
+        user_vehicle.tagid = form.tagid.data
+        db.session.commit()
+        flash(f"Vehicle No. {user_vehicle.vehiclenum} tagged successfully",'success')
+        return redirect(url_for('home.home'))
+
+    return render_template('add_new_vehicle/tag.html',title="Vehicle Tag",form=form,vehiclenum=vehiclenum)
