@@ -47,8 +47,8 @@
             <th scope="col">Owner Name</th>
             <th scope="col">Route No.</th>
             <th scope="col">Make/Model</th>
-            <th scope="col">Entry Time</th>
-            <th scope="col">Exit Time</th>
+            <!-- <th scope="col">Entry Time</th>
+            <th scope="col">Exit Time</th> -->
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -61,8 +61,8 @@
               <td>{{i.ownername}}</td>
               <td>{{i.routeno}}</td>
               <td>{{i.makemodel}}</td>
-              <td>{{i.entrytime}}</td>
-              <td>{{i.exitime}}</td>
+              <!-- <td>{{i.entrytime}}</td>
+              <td>{{i.exitime}}</td> -->
               <td>
                 <a href="{{url_for('add_new_vehicle.delete_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-danger">Delete</span></a>
                 <a href="{{url_for('add_new_vehicle.update_vehicle',uid=i.id)}}"><span class="badge rounded-pill bg-secondary">Update</span></a>

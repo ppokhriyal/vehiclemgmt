@@ -101,10 +101,12 @@
                     Unregistered Vehicle Movement
                   </a>
                 </li>
-                <li class="nav-item">
-                  <hr>
-                  <span class="ms-3 fw-bold" id="lblgreeting"></span>
-                </li>
+                <hr>
+                <div class="d-grid gap-2 col-5 mx-auto">
+                  <img src="{{url_for('static',filename='images/'+current_user.image_file)}}" alt="" width="64" height="64" class="rounded-circle">
+                  
+                </div>
+                <p class="d-grid gap-2 col-lg mx-auto mt-2 ms-2" id="lblgreeting">Welcome Admin</p>
               </ul>
             </ul>
           </div>
@@ -143,7 +145,7 @@
       else if (hrs >= 17 && hrs <= 24)
         greet = 'Good Evening';
 
-      document.getElementById('lblgreeting').innerHTML = "Welcome Admin, " + greet;
+      document.getElementById('lblgreeting').innerHTML = "Welcome Admin, "+ greet;
     </script>
   </body>
 </html>

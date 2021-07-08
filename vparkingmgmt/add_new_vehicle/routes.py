@@ -57,6 +57,7 @@ def update_vehicle(uid):
 def tag_vehicle():
     form = TagRegisteredVehicleForm()
     registered_vehicle_length = len(VehicalRegistered.query.filter_by(user_id=current_user.id).all())
+    untag_vehicle_length = len(VehicalRegistered.query.filter_by(tagid=None).all())
     if form.validate_on_submit():
         kwargs = {'vehiclenum':str(form.registered_vehicle.data)}
         user_vehicle = VehicalRegistered.query.filter_by(**kwargs).first()
@@ -64,7 +65,7 @@ def tag_vehicle():
         db.session.commit()
         flash(f"Vehicle No. {user_vehicle.vehiclenum} tagged successfully",'success')
         return redirect(url_for('home.home'))
-    return render_template('add_new_vehicle/tag_vehicle.html',title="Tag Vehicle",form=form,registered_vehicle_length=registered_vehicle_length)
+    return render_template('add_new_vehicle/tag_vehicle.html',title="Tag Vehicle",form=form,registered_vehicle_length=registered_vehicle_length,untag_vehicle_length=untag_vehicle_length)
 
 # Tag Vehicle
 @blue.route('/vehicle/tag/<string:vehiclenum>',methods=['POST','GET'])

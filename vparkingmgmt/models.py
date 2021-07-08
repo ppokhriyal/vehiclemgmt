@@ -21,6 +21,7 @@ class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(5))
     password = db.Column(db.String(10),nullable=False)
+    image_file = db.Column(db.String(20),nullable=False,default='default_user.png')
     vehicle = db.relationship('VehicalRegistered',backref='uservehicle',lazy=True,cascade='all,delete-orphan')
     def __repr__(self):
         return f"User('{self.username}')"
