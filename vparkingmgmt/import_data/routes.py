@@ -15,6 +15,7 @@ blue = Blueprint('import_data',__name__,template_folder='templates')
 # File Upload
 UPLOAD_FOLDER = '/tmp/'
 ALLOWED_EXTENSIONS = {'xlsx'}
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):

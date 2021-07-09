@@ -10,14 +10,14 @@
   </div>
   <div class="card w-50 mt-4 shadow">
     <div class="card-header fw-bold">
-        Upload Excel Data
+        Import Excel Data
     </div>
     <div class="card-body">
         <form action="" method="POST" enctype=multipart/form-data>
             {{form.hidden_tag()}}
             <div class="mb-3">
                 {{form.file(class="form-control w-75")}}
-                <small>'.xlsx' extnstions are allowed</small>
+                <small class="text-muted">.xlsx extensions are allowed.You can import upto 1MB file size</small>
             </div>
             <div class="mb-3">
                 {{form.submit(class="btn btn-sm btn-success")}}

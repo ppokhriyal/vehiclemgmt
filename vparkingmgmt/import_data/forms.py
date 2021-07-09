@@ -8,5 +8,5 @@ from vparkingmgmt.models import User,VehicalRegistered
 # Upload File Form
 class UploadForm(FlaskForm):
     file = FileField('Excel Data File',validators=[DataRequired()])
-    submit = SubmitField('Upload')
+    submit = SubmitField('Import')
 
