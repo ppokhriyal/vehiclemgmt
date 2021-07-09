@@ -9,6 +9,7 @@ import pandas
 import json
 import os
 
+
 #Blueprint object
 blue = Blueprint('import_data',__name__,template_folder='templates')
 
@@ -18,6 +19,7 @@ ALLOWED_EXTENSIONS = {'xlsx'}
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# func check the excel extention
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -46,15 +48,8 @@ def importdata():
                 db.session.commit()
             flash(f"Data from {data_file.filename} saved in database successfully",'success')
             return redirect(url_for('home.home'))
-
         else:
             flash(f"Invalid file {data_file.filename}",'danger')
             return redirect(url_for('import_data.importdata'))
-        
-    # 
-    # 
-    # thisisjson = excel_data_df.to_json(orient='records')
-    # # Make the string into a list to be able to input in to a JSON-file
-    # thisisjson_dict = json.loads(thisisjson)
     
     return render_template('import_data/importdata.html',title="Import Data",form=form)

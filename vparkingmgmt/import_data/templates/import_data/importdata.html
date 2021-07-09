@@ -4,20 +4,20 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url_for('home.home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Import Data</li>
+        <li class="breadcrumb-item active" aria-current="page">Import Vehicle Data</li>
       </ol>
     </nav>
   </div>
   <div class="card w-50 mt-4 shadow">
     <div class="card-header fw-bold">
-        Import Excel Data
+        Import Vehicle Data
     </div>
     <div class="card-body">
         <form action="" method="POST" enctype=multipart/form-data>
             {{form.hidden_tag()}}
             <div class="mb-3">
                 {{form.file(class="form-control w-75")}}
-                <small class="text-muted">.xlsx extensions are allowed.You can import upto 1MB file size</small>
+                <small class="text-muted">.xlsx extensions are allowed. You can import upto 1MB file size</small>
             </div>
             <div class="mb-3">
                 {{form.submit(class="btn btn-sm btn-success")}}
