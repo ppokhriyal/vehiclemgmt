@@ -8,15 +8,40 @@
     </nav>
   </div>
   <div class="mb-3">
-    <button type="button" class="btn btn-primary">
-      Total Vehicles entered <span class="badge bg-secondary">0</span>
-    </button>
-    <button type="button" class="btn btn-primary">
-      Total Vehicles exited <span class="badge bg-secondary">0</span>
-    </button>
-    <button type="button" class="btn btn-primary">
-      Total Unregistered Vehicles<span class="badge bg-secondary ms-2">0</span>
-    </button>
+    <div class="row row-cols-1 row-cols-md-3 g-4 text-white">
+      <div class="col-2">
+        <div class="card h-100 bg-primary shadow">
+          <div class="card-body">
+            <h6 class="card-title fw-bold">Registerd Vehicles</h6>
+            <h1 class="display-6">{{registered_vehicle_length}}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="card h-100 bg-primary shadow">
+          <div class="card-body">
+            <h6 class="card-title fw-bold">Un-Registred Vehicles</h6>
+            <h1 class="display-6">0</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="card h-100 bg-primary shadow">
+          <div class="card-body">
+            <h6 class="card-title fw-bold">Vehicles Entered</h6>
+            <h1 class="display-6">0</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="card h-100 bg-primary shadow">
+          <div class="card-body">
+            <h6 class="card-title fw-bold">Vehicles Exited</h6>
+            <h1 class="display-6">0</h1>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div>
     <!--Registered Vehicle Table-->
